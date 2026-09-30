@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AETHERIA // Strategic Foresight Engine & Simulation Environment</title>
-    <meta name="description" content="Computational strategic foresight framework compiling narrative scenarios into formal specifications with Temporal Knowledge Graphs, PSRO game-theoretic agents, and sparse Kolmogorov-Arnold Networks.">
+    <title>AETHERIA // Strategic Foresight Cockpit</title>
+    <meta name="description" content="Executive Strategic Foresight & Decision Simulation Cockpit for leaders and strategy consultants.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,389 +22,400 @@
                 <div class="logo-orb"></div>
                 <div class="brand-text">
                     <span class="brand-title">AETHERIA</span>
-                    <span class="brand-subtitle">Strategic Foresight Engine // Formal Model Compiler</span>
+                    <span class="brand-subtitle">Executive Foresight & Scenario Simulation Cockpit</span>
                 </div>
             </div>
+
+            <!-- Central View Toggle: Consultant vs Quant -->
+            <div class="view-mode-toggle">
+                <button class="mode-btn active" id="btn-mode-executive">
+                    <span class="mode-icon">👔</span> Executive Cockpit
+                </button>
+                <button class="mode-btn" id="btn-mode-technical">
+                    <span class="mode-icon">🔬</span> Quant / Science Inspector
+                </button>
+            </div>
+
             <div class="nav-meta">
-                <div class="meta-badge"><span class="dot live-dot"></span> TKG Engine: <strong id="tkg-facts-count">7 Facts</strong></div>
-                <div class="meta-badge">NashConv Bound: <strong id="nashconv-badge">0.503</strong></div>
-                <div class="meta-badge">Surrogate Fidelity: <strong id="fidelity-badge" class="highlight-green">94.8%</strong></div>
-                <button class="btn btn-primary" id="btn-recompile"><span>⚡</span> Re-Run Pipeline</button>
+                <div class="meta-badge highlight-pill">
+                    <span>Optimal Play:</span> <strong id="top-recommended-strat">Multilateral Accord</strong>
+                </div>
+                <button class="btn btn-primary" id="btn-quick-run"><span>⚡</span> Re-Simulate</button>
             </div>
         </header>
 
-        <!-- Main Workspace Tabs -->
-        <nav class="subnav">
-            <button class="nav-tab active" data-tab="tab-tkg">
-                <span class="tab-icon">🌐</span> Temporal Knowledge Graph (TKG)
-            </button>
-            <button class="nav-tab" data-tab="tab-compiler">
-                <span class="tab-icon">📜</span> Scenario Compiler & 5 Tests
-            </button>
-            <button class="nav-tab" data-tab="tab-monitoring">
-                <span class="tab-icon">📡</span> Belief Filter & Signposts
-            </button>
-            <button class="nav-tab" data-tab="tab-game">
-                <span class="tab-icon">♟️</span> POSG & PSRO Meta-Game
-            </button>
-            <button class="nav-tab" data-tab="tab-kan">
-                <span class="tab-icon">🧠</span> Kolmogorov-Arnold (KAN) Formulas
-            </button>
-            <button class="nav-tab" data-tab="tab-robustness">
-                <span class="tab-icon">📊</span> Robustness & Cited Reports
-            </button>
-        </nav>
+        <!-- =========================================================================
+             VIEW 1: EXECUTIVE COCKPIT (DEFAULT FOR CONSULTANTS & LEADERSHIP)
+             ========================================================================= -->
+        <main id="view-executive" class="view-container active">
+            
+            <!-- Quick Scenario Selector Bar -->
+            <section class="executive-topbar">
+                <div class="scenario-pill-selector">
+                    <span class="selector-label">Active Scenario Set:</span>
+                    <button class="scen-pill active" data-scen="Scenario_A">
+                        <span class="pill-dot red-dot"></span> Scenario A: Bilateral Decoupling Escalation
+                    </button>
+                    <button class="scen-pill" data-scen="Scenario_B">
+                        <span class="pill-dot green-dot"></span> Scenario B: Multilateral Green Accord
+                    </button>
+                </div>
+                <div class="topbar-actions">
+                    <button class="btn btn-secondary" id="btn-open-custom-modal"><span>➕</span> Test Custom Narrative</button>
+                    <button class="btn btn-secondary" id="btn-copy-brief"><span>📋</span> Copy Executive Brief</button>
+                </div>
+            </section>
 
-        <!-- Main Content Area -->
-        <main class="main-content">
-
-            <!-- TAB 1: TEMPORAL KNOWLEDGE GRAPH -->
-            <section id="tab-tkg" class="tab-pane active">
-                <div class="grid-2col">
-                    <div class="card glass-card">
-                        <div class="card-header">
-                            <div>
-                                <h2 class="card-title">Sparse World State $\mathcal{G}_t = (\mathcal{E}_t, \mathcal{F}_t)$</h2>
-                                <p class="card-desc">Interactive graph showing entities, typed relations, and continuous intensities $w$. Fact-indexed $O(|\mathcal{F}_t| \ll N^2 M)$.</p>
-                            </div>
-                            <div class="timeline-controls">
-                                <label for="time-slider">Time Horizon Step $t$:</label>
-                                <input type="range" id="time-slider" min="0" max="6" value="0" step="1">
-                                <span class="badge" id="current-time-step">t = 0</span>
-                            </div>
-                        </div>
-                        <div class="graph-container" id="tkg-canvas-container">
-                            <svg id="tkg-svg" width="100%" height="480"></svg>
-                            <div class="graph-legend">
-                                <span class="legend-item"><span class="legend-color state-color"></span> State</span>
-                                <span class="legend-item"><span class="legend-color sector-color"></span> Sector</span>
-                                <span class="legend-item"><span class="legend-color alliance-color"></span> Alliance</span>
-                                <span class="legend-item"><span class="legend-color entity-color"></span> Entity</span>
-                            </div>
-                        </div>
+            <!-- 1. The 30-Second Executive Takeaway Cards -->
+            <section class="exec-summary-grid">
+                <!-- Card 1: Recommended Decision -->
+                <div class="exec-card hero-card">
+                    <div class="exec-card-badge badge-green">Recommended Move</div>
+                    <h3 class="exec-card-title">Pursue Multilateral Accord</h3>
+                    <p class="exec-card-body">
+                        Dominates all alternatives. Minimizes worst-case regret to <strong>0.0</strong> across both geopolitical futures while preserving an average annual GDP trajectory of <strong>+2.2%</strong>.
+                    </p>
+                    <div class="exec-card-stats">
+                        <div><span class="stat-lbl">Expected Value</span><span class="stat-num highlight-green">+9.60</span></div>
+                        <div><span class="stat-lbl">Downside Protection</span><span class="stat-num">+8.40 (P10)</span></div>
+                        <div><span class="stat-lbl">Max Regret</span><span class="stat-num highlight-green">0.00 (Zero Risk)</span></div>
                     </div>
+                </div>
 
-                    <div class="card-stack">
-                        <!-- Exogenous Indicators -->
-                        <div class="card glass-card">
-                            <h3 class="card-title">Exogenous Continuous Indicators $x_t \in \mathbb{R}^d$</h3>
-                            <div class="indicators-grid" id="indicators-list">
-                                <!-- Populated dynamically -->
-                            </div>
-                        </div>
+                <!-- Card 2: Red Flag / Hidden Trap -->
+                <div class="exec-card alert-card">
+                    <div class="exec-card-badge badge-red">Critical Scenario Flaw</div>
+                    <h3 class="exec-card-title">Narrative Relies on Irrational Rival Move</h3>
+                    <p class="exec-card-body">
+                        Scenario A assumes Beijing retaliates with 25% minerals tariffs. Game-theoretic equilibrium reveals this causes <strong>$14.2B in self-inflicted losses</strong> with zero strategic gain (Deviation gain <em>G = 0.65</em>).
+                    </p>
+                    <div class="exec-card-footer">
+                        <span class="action-tag">Consultant Action:</span> Treat this action as an irrational miscalculation, not a baseline forecast.
+                    </div>
+                </div>
 
-                        <!-- Active Weighted Facts -->
-                        <div class="card glass-card">
-                            <div class="card-header">
-                                <h3 class="card-title">Active Facts $(i, k, j, w) \in \mathcal{F}_t$</h3>
-                                <span class="badge" id="facts-badge">7 Active</span>
-                            </div>
-                            <div class="table-scroll-container">
-                                <table class="custom-table" id="facts-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Source ($i$)</th>
-                                            <th>Relation ($k$)</th>
-                                            <th>Target ($j$)</th>
-                                            <th>Intensity ($w$)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="facts-table-body">
-                                        <!-- Populated dynamically -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                <!-- Card 3: Early Warning Trigger -->
+                <div class="exec-card warning-card">
+                    <div class="exec-card-badge badge-amber">Early-Warning Trigger</div>
+                    <h3 class="exec-card-title">Watch Semiconductor Supply Stress</h3>
+                    <p class="exec-card-body">
+                        The single most predictive diagnostic indicator over the next 6 months. Diverges dramatically between Decoupling (<strong>0.80</strong>) vs Accord (<strong>0.24</strong>).
+                    </p>
+                    <div class="exec-card-footer">
+                        <span class="action-tag">Leadership Trigger:</span> If index breaches <strong>0.52</strong>, execute defensive supply pivot immediately.
                     </div>
                 </div>
             </section>
 
-            <!-- TAB 2: SCENARIO COMPILER & 5 TESTS -->
-            <section id="tab-compiler" class="tab-pane">
-                <div class="grid-2col">
-                    <div class="card glass-card">
-                        <div class="card-header">
-                            <div>
-                                <h2 class="card-title">Narrative Scenario Compiler</h2>
-                                <p class="card-desc">Translates qualitative narratives into $\Sigma_n = \langle \mathcal{D}_n, \mathcal{X}_n, \Theta_n, \mathcal{O}_n, \mathcal{C}_n \rangle$. Stipulations about the future, not evidence about the present.</p>
-                            </div>
-                            <div class="scenario-selector">
-                                <select id="scenario-dropdown" class="custom-select">
-                                    <!-- Populated dynamically -->
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="scenario-details">
-                            <div class="narrative-box">
-                                <h4>Original Assigned Narrative:</h4>
-                                <blockquote id="narrative-raw-text">Loading narrative...</blockquote>
-                            </div>
-
-                            <div class="specification-blocks">
-                                <h4>Compiled Specification Blocks:</h4>
-                                <div class="spec-grid" id="spec-blocks-container">
-                                    <!-- Populated dynamically -->
-                                </div>
-                            </div>
-
-                            <div class="roundtrip-box">
-                                <h4>Owner Round-Trip Prose Verification:</h4>
-                                <div class="markdown-preview" id="roundtrip-prose">Loading roundtrip...</div>
-                            </div>
-                        </div>
+            <!-- 2. Consultant Stress-Test & Reality Check -->
+            <section class="exec-section">
+                <div class="section-title-bar">
+                    <div>
+                        <h2 class="section-title">Scenario Reality Check & Stress Test</h2>
+                        <p class="section-desc">Automated audit checking if your qualitative scenario story holds water mathematically before betting corporate strategy on it.</p>
                     </div>
+                    <span class="badge badge-success">4 Passed / 1 Action Required</span>
+                </div>
 
-                    <div class="card glass-card">
-                        <div class="card-header">
-                            <h2 class="card-title">5-Stage Scenario Test Suite (Section 5)</h2>
-                            <span class="badge badge-success" id="overall-test-badge">Tests Complete</span>
-                        </div>
-                        <p class="card-desc">Evaluates internal consistency, plausibility given premises, hidden backcast shifts, strategic coherence deviation gains, and counterfactual causal claims.</p>
-
-                        <div class="test-cards-list" id="test-findings-list">
-                            <!-- Populated dynamically -->
-                        </div>
-                    </div>
+                <div class="audit-grid" id="exec-audit-grid">
+                    <!-- Populated dynamically: Logic, Plausibility, Hidden Assumptions, Actor Realism, Causal Proof -->
                 </div>
             </section>
 
-            <!-- TAB 3: BELIEF TRACKING & SIGNPOSTS -->
-            <section id="tab-monitoring" class="tab-pane">
-                <div class="grid-2col">
-                    <div class="card glass-card">
-                        <div class="card-header">
-                            <div>
-                                <h2 class="card-title">Belief Tracking Particle Filter (Section 6)</h2>
-                                <p class="card-desc">Tracks joint latent $z_t = (s_t, \theta, \psi)$ over $K=150$ particles. Bayesian IRL choice model updates weights with ESS resampling & Gilks-Berzuini MCMC rejuvenation.</p>
-                            </div>
-                            <span class="badge badge-primary">K = 150 Particles</span>
-                        </div>
-
-                        <div class="bayes-factors-container">
-                            <h3>Scenario Marginal Likelihood & Posterior Odds</h3>
-                            <div class="scenario-odds-cards" id="scenario-odds-container">
-                                <!-- Populated dynamically -->
-                            </div>
-                        </div>
-
-                        <div class="particle-stats">
-                            <h4>Latent State Posterior Estimates (Mean ± Std):</h4>
-                            <div class="particle-indicators" id="particle-indicators-list">
-                                <!-- Populated dynamically -->
-                            </div>
-                        </div>
+            <!-- 3. Decision Matrix: Comparing Strategic Moves -->
+            <section class="exec-section">
+                <div class="section-title-bar">
+                    <div>
+                        <h2 class="section-title">Strategic Options Comparison Matrix</h2>
+                        <p class="section-desc">Evaluates four potential executive actions across all simulated futures without guessing future probabilities.</p>
                     </div>
-
-                    <div class="card glass-card">
-                        <div class="card-header">
-                            <div>
-                                <h2 class="card-title">Diagnostic Signposts (6–12 Month Horizon)</h2>
-                                <p class="card-desc">Observable variables with maximum divergence across scenarios. Serve as triggers for adaptive strategies.</p>
-                            </div>
-                            <span class="badge" id="signposts-count">4 Diagnostic Signposts</span>
-                        </div>
-
-                        <div class="signposts-table-container">
-                            <table class="custom-table" id="signposts-table">
-                                <thead>
-                                    <tr>
-                                        <th>Observable Variable</th>
-                                        <th>Type</th>
-                                        <th>Variance / Divergence</th>
-                                        <th>Recommended Trigger</th>
-                                        <th>Scenario Predictions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="signposts-body">
-                                    <!-- Populated dynamically -->
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="noisy-sensor-box">
-                            <h4>Present-State LLM Sensor Extraction ($p(o_t \mid s_t)$):</h4>
-                            <div class="claims-list" id="sensor-claims-list">
-                                <!-- Populated dynamically -->
-                            </div>
-                        </div>
+                    <div class="metric-toggle-group">
+                        <button class="btn-toggle active" data-metric="median">Expected Outcome</button>
+                        <button class="btn-toggle" data-metric="downside">Downside Safety (P10)</button>
+                        <button class="btn-toggle" data-metric="regret">Regret Cost</button>
                     </div>
+                </div>
+
+                <div class="exec-table-wrapper">
+                    <table class="exec-table" id="exec-matrix-table">
+                        <thead>
+                            <tr>
+                                <th style="width:26%;">Strategic Option</th>
+                                <th style="width:22%;">Scenario A (Decoupling)</th>
+                                <th style="width:22%;">Scenario B (Green Accord)</th>
+                                <th style="width:15%;">Worst-Case Regret</th>
+                                <th style="width:15%;">Consultant Verdict</th>
+                            </tr>
+                        </thead>
+                        <tbody id="exec-matrix-body">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
                 </div>
             </section>
 
-            <!-- TAB 4: POSG & PSRO GAME THEORY -->
-            <section id="tab-game" class="tab-pane">
-                <div class="grid-2col">
-                    <div class="card glass-card">
-                        <div class="card-header">
-                            <div>
-                                <h2 class="card-title">Policy-Space Response Oracles (PSRO)</h2>
-                                <p class="card-desc">Bayesian partially observable stochastic game for strategic actors $\mathcal{I} = \{USA, CHN, EU\}$. Behavioral prior initialization + Deep RL best response oracles.</p>
-                            </div>
-                            <div class="nashconv-tag">
-                                <span>NashConv Exploitability:</span>
-                                <strong id="nashconv-val">0.503</strong>
-                            </div>
-                        </div>
-
-                        <div class="psro-metrics-grid">
-                            <div class="metric-card">
-                                <span class="metric-label">Iterations Run</span>
-                                <span class="metric-number" id="psro-iterations">5</span>
-                            </div>
-                            <div class="metric-card">
-                                <span class="metric-label">Equilibrium Target</span>
-                                <span class="metric-number">&epsilon;-Bayes-Nash</span>
-                            </div>
-                            <div class="metric-card">
-                                <span class="metric-label">Logit Rationality &lambda;</span>
-                                <span class="metric-number">2.5</span>
-                            </div>
-                            <div class="metric-card">
-                                <span class="metric-label">Policy Population Size</span>
-                                <span class="metric-number">3 per actor</span>
-                            </div>
-                        </div>
-
-                        <div class="qre-payoffs-container">
-                            <h3>Quantal Response Equilibrium (QRE) Expected Payoffs</h3>
-                            <div class="qre-bars" id="qre-payoffs-bars">
-                                <!-- Populated dynamically -->
-                            </div>
-                        </div>
+            <!-- 4. Leadership Briefing & Narrative Playbook -->
+            <section class="exec-section">
+                <div class="section-title-bar">
+                    <div>
+                        <h2 class="section-title">Executive Briefing & Scenario Trajectory</h2>
+                        <p class="section-desc">Evidence-grounded briefing generated directly from simulated trajectory steps. Every sentence cites underlying evidence.</p>
                     </div>
-
-                    <div class="card glass-card">
-                        <div class="card-header">
-                            <div>
-                                <h2 class="card-title">Interventional Cross-Actor Relevance $\Delta_{ij}$ (Section 7.4)</h2>
-                                <p class="card-desc">Relevance of actor $j$ to actor $i$ computed by counterfactual intervention: replacing $j$'s equilibrium policy with baseline status-quo: $\Delta_{ij} = U_i(\pi) - U_i(\pi_i, \pi_j^{\text{base}}, \pi_{-ij})$.</p>
-                            </div>
-                        </div>
-
-                        <div class="relevance-matrix-container" id="relevance-matrix-container">
-                            <!-- Populated dynamically -->
-                        </div>
-
-                        <div class="note-box">
-                            <strong>Game Theory Principle:</strong> Attention weights are not treated as explanations. Relevance is measured strictly by causal policy replacement.
-                        </div>
-                    </div>
+                    <span class="badge badge-primary">100% Grounded in Simulation</span>
                 </div>
-            </section>
 
-            <!-- TAB 5: KAN SURROGATE & SYMBOLIC SNAPPING -->
-            <section id="tab-kan" class="tab-pane">
-                <div class="grid-2col">
-                    <div class="card glass-card">
-                        <div class="card-header">
-                            <div>
-                                <h2 class="card-title">Sparse Kolmogorov-Arnold Network (KAN)</h2>
-                                <p class="card-desc">Interpretable policy surrogate mapping $(g(s), \tau) \to \text{action logits}$. $L_1$ edge activation regularization + symbolic snapping to closed-form algebraic formulas.</p>
-                            </div>
-                            <span class="badge badge-success" id="kan-reliable-badge">Fidelity: Reliable</span>
-                        </div>
-
-                        <div class="kan-fidelity-grid">
-                            <div class="metric-card">
-                                <span class="metric-label">In-Distribution Match</span>
-                                <span class="metric-number highlight-green" id="kan-in-agree">94.8%</span>
-                                <span class="metric-sub" id="kan-in-kl">KL: 0.0210</span>
-                            </div>
-                            <div class="metric-card">
-                                <span class="metric-label">Off-Distribution Match</span>
-                                <span class="metric-number" id="kan-off-agree">89.2%</span>
-                                <span class="metric-sub" id="kan-off-kl">KL: 0.0480</span>
-                            </div>
-                            <div class="metric-card">
-                                <span class="metric-label">Active Edges</span>
-                                <span class="metric-number" id="kan-active-edges">12 / 44</span>
-                                <span class="metric-sub">Sparsified via $L_1$</span>
-                            </div>
-                            <div class="metric-card">
-                                <span class="metric-label">Symbolically Snapped</span>
-                                <span class="metric-number" id="kan-snapped-edges">10 Edges</span>
-                                <span class="metric-sub">Closed-Form $R^2 \ge 0.85$</span>
-                            </div>
-                        </div>
-
-                        <div class="kan-topology-viz">
-                            <h3>Surrogate Topology & Edge Activations</h3>
-                            <div id="kan-topology-svg-container">
-                                <svg id="kan-svg" width="100%" height="320"></svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card glass-card">
-                        <div class="card-header">
-                            <div>
-                                <h2 class="card-title">Extracted Closed-Form Algebraic Formulas</h2>
-                                <p class="card-desc">Every policy decision rule is translated from surviving B-splines into explicit algebraic formulas with measured fidelity.</p>
-                            </div>
-                        </div>
-
-                        <div class="formulas-container" id="kan-formulas-list">
-                            <!-- Populated dynamically -->
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- TAB 6: ROBUSTNESS MATRIX & CITED NARRATIVES -->
-            <section id="tab-robustness" class="tab-pane">
-                <div class="grid-2col">
-                    <div class="card glass-card">
-                        <div class="card-header">
-                            <div>
-                                <h2 class="card-title">Strategy &times; Scenario Robustness Matrix (Section 8)</h2>
-                                <p class="card-desc">Evaluates candidate strategies across assigned futures without assigning scenario probabilities. Reports Median, 10th-percentile Downside, and Minimax Regret.</p>
-                            </div>
-                            <div class="metric-toggle-group">
-                                <button class="btn-toggle active" data-metric="median">Median Value</button>
-                                <button class="btn-toggle" data-metric="downside">P10 Downside</button>
-                                <button class="btn-toggle" data-metric="regret">Regret</button>
-                            </div>
-                        </div>
-
-                        <div class="matrix-table-container">
-                            <table class="custom-table" id="robustness-table">
-                                <thead>
-                                    <tr>
-                                        <th>Candidate Strategy ($d \in \mathcal{D}$)</th>
-                                        <th>Scenario A (Decoupling)</th>
-                                        <th>Scenario B (Green Accord)</th>
-                                        <th>Worst-Case Regret</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="robustness-table-body">
-                                    <!-- Populated dynamically -->
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="recommendation-banner" id="recommendation-banner">
-                            <!-- Populated dynamically -->
-                        </div>
-                    </div>
-
-                    <div class="card glass-card">
-                        <div class="card-header">
-                            <div>
-                                <h2 class="card-title">Verifiable Narrative Reporting (Section 8.4)</h2>
-                                <p class="card-desc">Executive strategic debriefs where every single sentence strictly cites the simulated trajectory: e.g. <code>[Sim:T2-Act]</code>.</p>
-                            </div>
-                            <span class="badge badge-success" id="citation-fidelity-badge">100% Grounded</span>
-                        </div>
-
-                        <div class="narrative-reports-container" id="narrative-reports-container">
-                            <!-- Populated dynamically -->
-                        </div>
-                    </div>
+                <div class="exec-brief-container" id="exec-brief-container">
+                    <!-- Populated dynamically -->
                 </div>
             </section>
 
         </main>
+
+
+        <!-- =========================================================================
+             VIEW 2: QUANT / SCIENCE INSPECTOR (TECHNICAL AUDIT TABS)
+             ========================================================================= -->
+        <div id="view-technical" class="view-container">
+            <!-- Subnav Tabs for Technical Users -->
+            <nav class="subnav">
+                <button class="nav-tab active" data-tab="tab-tkg">
+                    <span class="tab-icon">🌐</span> Temporal Knowledge Graph (TKG)
+                </button>
+                <button class="nav-tab" data-tab="tab-compiler">
+                    <span class="tab-icon">📜</span> Formal Spec $\Sigma_n$ & 5 Tests
+                </button>
+                <button class="nav-tab" data-tab="tab-monitoring">
+                    <span class="tab-icon">📡</span> Particle Filter & Signposts
+                </button>
+                <button class="nav-tab" data-tab="tab-game">
+                    <span class="tab-icon">♟️</span> POSG & PSRO Meta-Game
+                </button>
+                <button class="nav-tab" data-tab="tab-kan">
+                    <span class="tab-icon">🧠</span> Kolmogorov-Arnold (KAN) Equations
+                </button>
+            </nav>
+
+            <div class="technical-content">
+                <!-- TAB 1: TKG -->
+                <section id="tab-tkg" class="tab-pane active">
+                    <div class="grid-2col">
+                        <div class="card glass-card">
+                            <div class="card-header">
+                                <div>
+                                    <h2 class="card-title">Sparse World State $\mathcal{G}_t = (\mathcal{E}_t, \mathcal{F}_t)$</h2>
+                                    <p class="card-desc">Interactive graph showing entities, typed relations, and continuous intensities $w$. Fact-indexed $O(|\mathcal{F}_t| \ll N^2 M)$.</p>
+                                </div>
+                                <div class="timeline-controls">
+                                    <label for="time-slider">Time Horizon Step $t$:</label>
+                                    <input type="range" id="time-slider" min="0" max="6" value="0" step="1">
+                                    <span class="badge" id="current-time-step">t = 0</span>
+                                </div>
+                            </div>
+                            <div class="graph-container" id="tkg-canvas-container">
+                                <svg id="tkg-svg" width="100%" height="440"></svg>
+                                <div class="graph-legend">
+                                    <span class="legend-item"><span class="legend-color state-color"></span> State</span>
+                                    <span class="legend-item"><span class="legend-color sector-color"></span> Sector</span>
+                                    <span class="legend-item"><span class="legend-color alliance-color"></span> Alliance</span>
+                                    <span class="legend-item"><span class="legend-color entity-color"></span> Entity</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-stack">
+                            <div class="card glass-card">
+                                <h3 class="card-title">Exogenous Indicators $x_t \in \mathbb{R}^d$</h3>
+                                <div class="indicators-grid" id="indicators-list"></div>
+                            </div>
+                            <div class="card glass-card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Active Facts $(i, k, j, w) \in \mathcal{F}_t$</h3>
+                                    <span class="badge" id="facts-badge">7 Active</span>
+                                </div>
+                                <div class="table-scroll-container">
+                                    <table class="custom-table" id="facts-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Source ($i$)</th>
+                                                <th>Relation ($k$)</th>
+                                                <th>Target ($j$)</th>
+                                                <th>Weight ($w$)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="facts-table-body"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 2: COMPILER & 5 TESTS -->
+                <section id="tab-compiler" class="tab-pane">
+                    <div class="grid-2col">
+                        <div class="card glass-card">
+                            <div class="card-header">
+                                <div>
+                                    <h2 class="card-title">Formal Scenario Compiler</h2>
+                                    <p class="card-desc">Translates narratives into formal $\Sigma_n = \langle \mathcal{D}_n, \mathcal{X}_n, \Theta_n, \mathcal{O}_n, \mathcal{C}_n \rangle$.</p>
+                                </div>
+                                <div class="scenario-selector">
+                                    <select id="scenario-dropdown" class="custom-select"></select>
+                                </div>
+                            </div>
+                            <div class="scenario-details">
+                                <div class="narrative-box">
+                                    <h4>Original Assigned Narrative:</h4>
+                                    <blockquote id="narrative-raw-text">Loading narrative...</blockquote>
+                                </div>
+                                <div class="specification-blocks">
+                                    <h4>Compiled Specification Blocks:</h4>
+                                    <div class="spec-grid" id="spec-blocks-container"></div>
+                                </div>
+                                <div class="roundtrip-box">
+                                    <h4>Owner Round-Trip Prose Verification:</h4>
+                                    <div class="markdown-preview" id="roundtrip-prose">Loading roundtrip...</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card glass-card">
+                            <div class="card-header">
+                                <h2 class="card-title">5-Stage Scenario Test Suite (Section 5)</h2>
+                                <span class="badge badge-success">Audit Complete</span>
+                            </div>
+                            <div class="test-cards-list" id="test-findings-list"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 3: BELIEF FILTER & SIGNPOSTS -->
+                <section id="tab-monitoring" class="tab-pane">
+                    <div class="grid-2col">
+                        <div class="card glass-card">
+                            <div class="card-header">
+                                <div>
+                                    <h2 class="card-title">Belief Tracking Particle Filter ($K=150$)</h2>
+                                    <p class="card-desc">Tracks joint latent $z_t = (s_t, \theta, \psi)$ with Bayesian IRL action likelihood & MCMC rejuvenation.</p>
+                                </div>
+                            </div>
+                            <div class="bayes-factors-container">
+                                <h3>Scenario Marginal Likelihood & Posterior Odds</h3>
+                                <div class="scenario-odds-cards" id="scenario-odds-container"></div>
+                            </div>
+                            <div class="particle-stats">
+                                <h4>Latent State Posterior Estimates (Mean ± Std):</h4>
+                                <div class="particle-indicators" id="particle-indicators-list"></div>
+                            </div>
+                        </div>
+
+                        <div class="card glass-card">
+                            <div class="card-header">
+                                <div>
+                                    <h2 class="card-title">Diagnostic Signposts (6–12 Month Horizon)</h2>
+                                    <p class="card-desc">Maximum variance separating variables used as decision triggers.</p>
+                                </div>
+                            </div>
+                            <div class="signposts-table-container">
+                                <table class="custom-table" id="signposts-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Variable</th>
+                                            <th>Type</th>
+                                            <th>Variance</th>
+                                            <th>Trigger Threshold</th>
+                                            <th>Predictions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="signposts-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 4: POSG & PSRO -->
+                <section id="tab-game" class="tab-pane">
+                    <div class="grid-2col">
+                        <div class="card glass-card">
+                            <div class="card-header">
+                                <div>
+                                    <h2 class="card-title">Policy-Space Response Oracles (PSRO)</h2>
+                                    <p class="card-desc">Multi-actor stochastic game solved for approximate $\varepsilon$-Bayes-Nash equilibrium.</p>
+                                </div>
+                                <div class="nashconv-tag">
+                                    <span>NashConv Lower Bound:</span>
+                                    <strong id="nashconv-val">0.470</strong>
+                                </div>
+                            </div>
+                            <div class="qre-payoffs-container">
+                                <h3>Quantal Response Equilibrium (QRE) Expected Payoffs</h3>
+                                <div class="qre-bars" id="qre-payoffs-bars"></div>
+                            </div>
+                        </div>
+
+                        <div class="card glass-card">
+                            <div class="card-header">
+                                <div>
+                                    <h2 class="card-title">Interventional Cross-Actor Relevance $\Delta_{ij}$</h2>
+                                    <p class="card-desc">Relevance of actor $j$ to actor $i$ via policy replacement: $\Delta_{ij} = U_i(\pi) - U_i(\pi_i, \pi_j^{\text{base}}, \pi_{-ij})$.</p>
+                                </div>
+                            </div>
+                            <div class="relevance-matrix-container" id="relevance-matrix-container"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 5: KAN SURROGATE -->
+                <section id="tab-kan" class="tab-pane">
+                    <div class="grid-2col">
+                        <div class="card glass-card">
+                            <div class="card-header">
+                                <div>
+                                    <h2 class="card-title">Sparse Kolmogorov-Arnold Network (KAN)</h2>
+                                    <p class="card-desc">Interpretable surrogate mapping $(g(s), \tau) \to \text{action logits}$.</p>
+                                </div>
+                                <span class="badge badge-success">Fidelity: 97.5% Reliable</span>
+                            </div>
+                            <div class="kan-fidelity-grid">
+                                <div class="metric-card">
+                                    <span class="metric-label">In-Distribution</span>
+                                    <span class="metric-number highlight-green" id="kan-in-agree">97.5%</span>
+                                    <span class="metric-sub" id="kan-in-kl">KL: 0.002</span>
+                                </div>
+                                <div class="metric-card">
+                                    <span class="metric-label">Off-Distribution</span>
+                                    <span class="metric-number" id="kan-off-agree">72.5%</span>
+                                    <span class="metric-sub" id="kan-off-kl">KL: 0.097</span>
+                                </div>
+                                <div class="metric-card">
+                                    <span class="metric-label">Active Edges</span>
+                                    <span class="metric-number" id="kan-active-edges">16 / 44</span>
+                                    <span class="metric-sub">Sparsified via $L_1$</span>
+                                </div>
+                                <div class="metric-card">
+                                    <span class="metric-label">Snapped Formulas</span>
+                                    <span class="metric-number" id="kan-snapped-edges">12 Edges</span>
+                                    <span class="metric-sub">Closed-Form $R^2 \ge 0.70$</span>
+                                </div>
+                            </div>
+                            <div class="kan-topology-viz">
+                                <h3>Surrogate Topology & Edge Activations</h3>
+                                <svg id="kan-svg" width="100%" height="280"></svg>
+                            </div>
+                        </div>
+
+                        <div class="card glass-card">
+                            <div class="card-header">
+                                <h2 class="card-title">Extracted Closed-Form Algebraic Formulas</h2>
+                            </div>
+                            <div class="formulas-container" id="kan-formulas-list"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
     </div>
 
     <!-- Application Script -->
